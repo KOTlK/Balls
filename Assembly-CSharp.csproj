@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{5C1DC67E-76CD-EB93-0A99-77B4C25F67BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -54,7 +55,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UI.cs" />
-    <Compile Include="Assets\Scripts\Balls\IIdentifiable.cs" />
+    <Compile Include="Assets\Scripts\Balls\IPoolable.cs" />
     <Compile Include="Assets\Scripts\Balls\Ball.cs" />
     <Compile Include="Assets\Scripts\Extensions\CameraExtensions.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIView.cs" />

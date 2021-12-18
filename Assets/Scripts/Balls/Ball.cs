@@ -4,7 +4,7 @@ using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Collider))]
-public class Ball : MonoBehaviour, IIdentifiable
+public class Ball : MonoBehaviour, IPoolable
 {
     private SpriteRenderer _renderer;
     private Color _ballColor;
