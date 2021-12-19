@@ -1,6 +1,5 @@
 using UnityEngine;
 using Extensions;
-using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Collider))]

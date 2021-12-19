@@ -1,6 +1,4 @@
-﻿using System;
-
-public class InGameUIController
+﻿public class InGameUIController
 {
     private readonly InGameUIModel _model;
     private OnScreenData _screenData;
@@ -18,6 +16,10 @@ public class InGameUIController
 
 
 
-    public void Open() => _model.Open();
+    public void Open()
+    {
+        UpdateUI();
+        _model.Open();
+    }
     public void Close() => _model.Close();
 }

@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 
-public class InGameUI
+public class InGameUI : IWindow
 {
     private readonly InGameUIModel _model;
     private readonly InGameUIController _controller;
     private readonly InGameUIView _view;
 
-    public InGameUIController Controller => _controller;
 
     public InGameUI(Canvas canvas, InGameUIData data, OnScreenData screenData)
     {
@@ -16,4 +15,8 @@ public class InGameUI
         screenData.Score.ScoreChanged += _controller.UpdateUI;
         screenData.HP.HpChanged += _controller.UpdateUI;
     }
+
+    public void Open() => _controller.Open();
+
+    public void Close() => _controller.Close();
 }
