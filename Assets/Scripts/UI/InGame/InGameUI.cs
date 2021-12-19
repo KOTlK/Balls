@@ -20,3 +20,9 @@ public class InGameUI : IWindow
 
     public void Close() => _controller.Close();
 }
+
+public struct OnScreenData
+{
+    public Score Score;
+    public Hp HP;
+}
