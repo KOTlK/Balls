@@ -6,23 +6,22 @@ using System;
 [RequireComponent(typeof(Collider))]
 public class Ball : MonoBehaviour, IPoolable
 {
+    private BallInitialData _data;
     private SpriteRenderer _renderer;
+    private Falling _falling;
+    private Particles _particles;
+    private BallHandler _handler;
+
     private Color _ballColor;
     private float _ballRadius;
     private LifeStatus _status;
-    private Falling _falling;
     private int _id;
-    private BallInitialData _data;
-    private Score _score;
     private int _scoreForCatch;
+    private int _hpForFall;
 
-    private Particles _particles;
-
-    public event Action Catched;
-    public event Action Disposed;
-
-    public LifeStatus Status => _status;
     public int ID => _id;
+    public int ScoreForCatch => _scoreForCatch;
+    public int HpforFall => _hpForFall;
 
     private Pool<Ball> ActiveBalls => _data.Pool.ActiveBalls;
     private Pool<Ball> InactiveBalls => _data.Pool.InactiveBalls;
@@ -32,20 +31,15 @@ public class Ball : MonoBehaviour, IPoolable
     {
         _data = data;
         _particles = _data.Particles;
+        _handler = data.BallHandler;
         _falling = new Falling(UnityEngine.Random.Range(1f, 3f), this.transform, _data.Difficulty);
-        _score = data.Score;
-    }
-
-    public void Catch()
-    {
-        Catched?.Invoke();
-        _score.Increase(_scoreForCatch);
     }
 
 
-    public void Dispose()
+    public void Fall()
     {
-        Disposed?.Invoke();
+        _handler.Fall(this);
+        Deactivate();
     }
 
     public void Activate()
@@ -67,6 +61,13 @@ public class Ball : MonoBehaviour, IPoolable
         }
         _id = InactiveBalls.Add(this);
         this.gameObject.SetActive(false);
+    }
+
+    private void Catch()
+    {
+        _handler.Catch(this);
+        PlayParticles();
+        Deactivate();
     }
 
     private void PlayParticles()
@@ -94,22 +95,14 @@ public class Ball : MonoBehaviour, IPoolable
         _ballColor = _ballColor.GetRandomColor();
         _renderer.material.color = _ballColor;
 
-        _scoreForCatch = (int)(UnityEngine.Random.Range(3, 12) / _ballRadius);
+        _scoreForCatch = (int)(UnityEngine.Random.Range(3, 12) / _ballRadius); // smaller ball => more score
+        _hpForFall = (int)(UnityEngine.Random.Range(5, 10) * _ballRadius); // bigger ball fell => more score lose
 
-        Catched += PlayParticles;
-        Catched += Deactivate;
-
-        Disposed += Deactivate;
     }
 
     private void OnDisable()
     {
         _status = LifeStatus.Dead;
-
-        Catched -= PlayParticles;
-        Catched -= Deactivate;
-
-        Disposed -= Deactivate;
     }
 
 
@@ -141,6 +134,6 @@ public struct BallInitialData
     public IDifficulty Difficulty;
     public ObjectsPool Pool;
     public Particles Particles;
-    public Score Score;
+    public BallHandler BallHandler;
 }
 

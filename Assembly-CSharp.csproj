@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{5C1DC67E-76CD-EB93-0A99-77B4C25F67BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -54,7 +53,9 @@
     <UnityVersion>2020.3.5f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Balls\Spawner\BallsSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\UI.cs" />
+    <Compile Include="Assets\Scripts\Balls\BallHandler.cs" />
     <Compile Include="Assets\Scripts\Balls\IPoolable.cs" />
     <Compile Include="Assets\Scripts\Balls\Ball.cs" />
     <Compile Include="Assets\Scripts\Extensions\CameraExtensions.cs" />
@@ -62,25 +63,26 @@
     <Compile Include="Assets\Scripts\Interfaces\IUpdatable.cs" />
     <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Balls\Falling.cs" />
+    <Compile Include="Assets\Scripts\Player\Score.cs" />
     <Compile Include="Assets\Scripts\Settings\Settings.cs" />
     <Compile Include="Assets\Scripts\Core.cs" />
+    <Compile Include="Assets\Scripts\Balls\Spawner\BallDestroyer.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIData.cs" />
     <Compile Include="Assets\Scripts\Balls\Particles.cs" />
     <Compile Include="Assets\Scripts\Difficulty\IncreaseDifficultyByTime.cs" />
     <Compile Include="Assets\Scripts\ObjectPool\Pool.cs" />
     <Compile Include="Assets\Scripts\GameTime\GameTick.cs" />
+    <Compile Include="Assets\Scripts\Balls\Spawner\BallsFactory.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIController.cs" />
+    <Compile Include="Assets\Scripts\Player\Hp.cs" />
     <Compile Include="Assets\Scripts\ObjectPool\ObjectsPool.cs" />
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUI.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIModel.cs" />
     <Compile Include="Assets\Scripts\Difficulty\IDifficulty.cs" />
-    <Compile Include="Assets\Scripts\UI\IWindow.cs" />
-    <Compile Include="Assets\Scripts\Score\Score.cs" />
-    <Compile Include="Assets\Scripts\Balls\Spawner\BallsSpawner.cs" />
-    <Compile Include="Assets\Scripts\Balls\Spawner\BallDestroyer.cs" />
     <Compile Include="Assets\Scripts\Balls\Spawner\Respawner.cs" />
-    <Compile Include="Assets\Scripts\Balls\Spawner\BallsFactory.cs" />
+    <Compile Include="Assets\Scripts\UI\IWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

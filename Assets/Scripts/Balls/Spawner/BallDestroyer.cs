@@ -24,7 +24,7 @@ public class BallDestroyer : IUpdatable
         {
             if(ball.transform.position.y < _destroyCoordinate - YOffset)
             {
-                ball.Dispose();
+                ball.Fall();
             }
         }
     }

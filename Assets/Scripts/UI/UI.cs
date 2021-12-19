@@ -24,5 +24,5 @@ public class UI
 public struct OnScreenData
 {
     public Score Score;
-    public int HP;
+    public Hp HP;
 }

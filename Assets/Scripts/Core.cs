@@ -21,9 +21,10 @@ public class Core : MonoBehaviour
     private Particles _particles;
     private BallInitialData _ballData;
     private SpawnerData _spawnerData;
-    private Score _score;
+    private Player _player;
     private UI _ui;
     private OnScreenData _screenData;
+    private BallHandler _ballHandler;
 
     private float SpawnOffsetX => _settings.SpawnOffsetX;
     private float SpawnOffsetY => _settings.SpawnOffsetY;
@@ -36,9 +37,10 @@ public class Core : MonoBehaviour
         _particles.Init();
 
         _gameTime = new GameTick();
-        _score = new Score();
+        _ballHandler = new BallHandler();
+        _player = new Player(_ballHandler);
         _difficulty = new IncreaseDifficultyByTime(_settings.TimeBeforeDifficultyIncrease, _gameTime);
-        _ballData = new BallInitialData() { Difficulty = _difficulty, Pool = _objectsPool, Particles = _particles, Score = _score };
+        _ballData = new BallInitialData() { Difficulty = _difficulty, Pool = _objectsPool, Particles = _particles, BallHandler = _ballHandler };
 
         _mainCamera = Camera.main;
 
@@ -50,10 +52,11 @@ public class Core : MonoBehaviour
                                            Parent = _ballsParent,
                                            Prefab = _ballPrefab,
                                            MaxBallsAmount = _settings.MaxBallsAmount,
+                                           BallHandler = _ballHandler
         };
         _ballSpawner = new BallsSpawner(_spawnerData);
 
-        _screenData = new OnScreenData() { HP = 100, Score = _score, };
+        _screenData = new OnScreenData() { HP = _player.Hp, Score = _player.Score };
         _ui = new UI(_pauseMenuCanvas, _inGameMenuCanvas, _screenData);
         _ui.Init();
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InGameUI
 {
@@ -13,7 +12,8 @@ public class InGameUI
     {
         _model = new InGameUIModel();
         _view = new InGameUIView(_model, canvas, data);
-        _controller = new InGameUIController(_model);
-        screenData.Score.ScoreChanged += _controller.UpdateScore;
+        _controller = new InGameUIController(_model, screenData);
+        screenData.Score.ScoreChanged += _controller.UpdateUI;
+        screenData.HP.HpChanged += _controller.UpdateUI;
     }
 }

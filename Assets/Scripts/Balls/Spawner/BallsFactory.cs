@@ -8,9 +8,6 @@ public class BallsFactory
     private readonly Vector2 _cachePoint;
     private readonly BallInitialData _ballData;
 
-    public event Action BallCatched;
-    public event Action BallFell;
-
     public BallsFactory(Transform parent, GameObject prefab, BallInitialData ballData)
     {
         _ballData = ballData;
@@ -26,8 +23,6 @@ public class BallsFactory
             var ballobject = MonoBehaviour.Instantiate(_prefab, _cachePoint, Quaternion.identity, _parent);
             var ballComponent = ballobject.GetComponent<Ball>();
             ballComponent.Init(_ballData);
-            ballComponent.Catched += BallCatched;
-            ballComponent.Disposed += BallFell;
             ballComponent.Deactivate();
             amount--;
         }

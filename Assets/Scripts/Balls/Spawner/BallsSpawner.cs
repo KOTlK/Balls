@@ -16,8 +16,7 @@ public class BallsSpawner : IUpdatable
         _factory = new BallsFactory(data.Parent, data.Prefab, data.InitialData);
         _destroyer = new BallDestroyer(data.InitialData.Pool);
         _respawner = new Respawner(data.MaxBallsOnScreen, _factory, data.MinXSpawnPositon, data.MaxXSpawnPositon, data.YPosition);
-        _factory.BallCatched += _respawner.DecreaseAmount;
-        _factory.BallFell += _respawner.DecreaseAmount;
+        data.BallHandler.BallRemoved += _respawner.DecreaseAmount;
         _factory.CacheObjects(data.MaxBallsAmount);
     }
 
@@ -41,5 +40,5 @@ public struct SpawnerData
     public float MaxXSpawnPositon;
     public float YPosition;
     public int MaxBallsAmount;
-
+    public BallHandler BallHandler;
 }

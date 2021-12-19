@@ -4,22 +4,18 @@ public class InGameUIController
 {
     private readonly InGameUIModel _model;
     private OnScreenData _screenData;
-    public InGameUIController(InGameUIModel model)
+    public InGameUIController(InGameUIModel model, OnScreenData screenData)
     {
+        _screenData = screenData;
         _model = model;
     }
 
 
-    public void UpdateUI(OnScreenData data)
+    public void UpdateUI()
     {
-        _model.UpdateModel(data);
+        _model.UpdateModel(_screenData);
     }
 
-    public void UpdateScore(Score score)
-    {
-        _screenData.Score = score;
-        UpdateUI(_screenData);
-    }
 
 
     public void Open() => _model.Open();
