@@ -8,7 +8,7 @@ public class UI
     public UI(Canvas pauseMenuCanvas, Canvas inGameUICanvas, OnScreenData screenData)
     {
         _pauseMenu = new PauseMenu(pauseMenuCanvas);
-        _inGameUI = new InGameUI(inGameUICanvas, inGameUICanvas.GetComponent<InGameUIData>(), screenData);
+        _inGameUI = new InGameUI(inGameUICanvas, screenData);
     }
 
     public void Init()

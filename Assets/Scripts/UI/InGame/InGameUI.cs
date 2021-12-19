@@ -7,8 +7,9 @@ public class InGameUI : IWindow
     private readonly InGameUIView _view;
 
 
-    public InGameUI(Canvas canvas, InGameUIData data, OnScreenData screenData)
+    public InGameUI(Canvas canvas, OnScreenData screenData)
     {
+        var data = canvas.GetComponent<InGameUIData>();
         _model = new InGameUIModel();
         _view = new InGameUIView(_model, canvas, data);
         _controller = new InGameUIController(_model, screenData);

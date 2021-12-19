@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\Extensions\CameraExtensions.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIView.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUpdatable.cs" />
-    <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Balls\Falling.cs" />
     <Compile Include="Assets\Scripts\Player\Score.cs" />
     <Compile Include="Assets\Scripts\Settings\Settings.cs" />
@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\UI\IWindow.cs" />
     <Compile Include="Assets\Scripts\Pause\IPausable.cs" />
     <Compile Include="Assets\Scripts\Pause\GamePause.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu\PauseMenuData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
