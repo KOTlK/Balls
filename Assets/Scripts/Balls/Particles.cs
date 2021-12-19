@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Particles
+public class Particles : IPausable
 {
     private readonly ParticleSystem _prefab;
     private readonly Queue<ParticleSystem> _particles;
     private readonly Transform _parent;
     private int _amountToSpawn;
 
-    public Particles(int amount, ParticleSystem prefab, Transform parent)
+    public Particles(int amount, ParticleSystem prefab, Transform parent, GamePause gamePause)
     {
+        gamePause.AddPauasble(this);
         _parent = parent;
         _particles = new Queue<ParticleSystem>();
         _amountToSpawn = amount;
@@ -24,6 +25,28 @@ public class Particles
         particle.transform.position = position;
         particle.Play();
         _particles.Enqueue(particle);
+    }
+
+    public void Pause()
+    {
+        foreach (var particle in _particles)
+        {
+            if (particle.isPlaying)
+            {
+                particle.Pause();
+            }
+        }
+    }
+
+    public void Unpause()
+    {
+        foreach (var particle in _particles)
+        {
+            if (particle.isPaused)
+            {
+                particle.Play();
+            }
+        }
     }
 
     public void Init()

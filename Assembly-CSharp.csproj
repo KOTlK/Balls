@@ -83,6 +83,8 @@
     <Compile Include="Assets\Scripts\Difficulty\IDifficulty.cs" />
     <Compile Include="Assets\Scripts\Balls\Spawner\Respawner.cs" />
     <Compile Include="Assets\Scripts\UI\IWindow.cs" />
+    <Compile Include="Assets\Scripts\Pause\IPausable.cs" />
+    <Compile Include="Assets\Scripts\Pause\GamePause.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -18,8 +18,8 @@
 
     public void Open()
     {
-        UpdateUI();
         _model.Open();
+        UpdateUI();
     }
     public void Close() => _model.Close();
 }

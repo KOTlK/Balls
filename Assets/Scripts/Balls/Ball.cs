@@ -3,7 +3,7 @@ using Extensions;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Collider))]
-public class Ball : MonoBehaviour, IPoolable
+public class Ball : MonoBehaviour, IPoolable, IPausable
 {
     private BallInitialData _data;
     private SpriteRenderer _renderer;
@@ -29,6 +29,7 @@ public class Ball : MonoBehaviour, IPoolable
     public void Init(BallInitialData data)
     {
         _data = data;
+        _data.GamePause.AddPauasble(this);
         _particles = _data.Particles;
         _handler = data.BallHandler;
         _falling = new Falling(UnityEngine.Random.Range(1f, 3f), this.transform, _data.Difficulty);
@@ -60,6 +61,15 @@ public class Ball : MonoBehaviour, IPoolable
         }
         _id = InactiveBalls.Add(this);
         this.gameObject.SetActive(false);
+    }
+    public void Pause()
+    {
+        _falling.StopFalling();
+    }
+
+    public void Unpause()
+    {
+        _falling.StartFalling();
     }
 
     private void Catch()
@@ -107,15 +117,17 @@ public class Ball : MonoBehaviour, IPoolable
 
     private void OnMouseDown()
     {
-        if (_status == LifeStatus.Alive)
+        if (_status == LifeStatus.Alive && _data.GamePause.isPaused == false)
         {
             Catch();
         }
 
     }
-    #endregion
 
     
+    #endregion
+
+
 
 }
 
@@ -134,5 +146,6 @@ public struct BallInitialData
     public ObjectsPool Pool;
     public Particles Particles;
     public BallHandler BallHandler;
+    public GamePause GamePause;
 }
 

@@ -18,6 +18,7 @@ public class Core : MonoBehaviour
     private GameTick _gameTime;
     private BallsSpawner _ballSpawner;
     private Camera _mainCamera;
+    private GamePause _gamePause;
     private Particles _particles;
     private BallInitialData _ballData;
     private SpawnerData _spawnerData;
@@ -32,15 +33,16 @@ public class Core : MonoBehaviour
     private void Awake()
     {
         _objectsPool = new ObjectsPool();
+        _gamePause = new GamePause();
 
-        _particles = new Particles(_settings.MaxBallsAmount, _particlesPrefab, _particlesParent);
+        _particles = new Particles(_settings.MaxBallsAmount, _particlesPrefab, _particlesParent, _gamePause);
         _particles.Init();
 
         _gameTime = new GameTick();
         _ballHandler = new BallHandler();
         _player = new Player(_ballHandler);
         _difficulty = new IncreaseDifficultyByTime(_settings.TimeBeforeDifficultyIncrease, _gameTime);
-        _ballData = new BallInitialData() { Difficulty = _difficulty, Pool = _objectsPool, Particles = _particles, BallHandler = _ballHandler };
+        _ballData = new BallInitialData() { Difficulty = _difficulty, Pool = _objectsPool, Particles = _particles, BallHandler = _ballHandler, GamePause = _gamePause };
 
         _mainCamera = Camera.main;
 
@@ -67,6 +69,14 @@ public class Core : MonoBehaviour
         _gameTime.Update();
         _difficulty.Update();
         _ballSpawner.Update();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _gamePause.Pause();
+        }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _gamePause.Unpause();
+        }
     }
 }
