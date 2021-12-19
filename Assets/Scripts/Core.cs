@@ -42,7 +42,13 @@ public class Core : MonoBehaviour
         _ballHandler = new BallHandler();
         _player = new Player(_ballHandler);
         _difficulty = new IncreaseDifficultyByTime(_settings.TimeBeforeDifficultyIncrease, _gameTime);
-        _ballData = new BallInitialData() { Difficulty = _difficulty, Pool = _objectsPool, Particles = _particles, BallHandler = _ballHandler, GamePause = _gamePause };
+
+        _ballData = new BallInitialData() { Difficulty = _difficulty, 
+                                            Pool = _objectsPool, 
+                                            Particles = _particles, 
+                                            BallHandler = _ballHandler, 
+                                            GamePause = _gamePause,
+        };
 
         _mainCamera = Camera.main;
 
