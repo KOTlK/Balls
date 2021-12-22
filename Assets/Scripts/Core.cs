@@ -20,11 +20,8 @@ public class Core : MonoBehaviour
     private Camera _mainCamera;
     private GamePause _gamePause;
     private Particles _particles;
-    private BallInitialData _ballData;
-    private SpawnerData _spawnerData;
     private Player _player;
     private UI _ui;
-    private OnScreenData _screenData;
     private BallHandler _ballHandler;
 
     private float SpawnOffsetX => _settings.SpawnOffsetX;
@@ -43,7 +40,7 @@ public class Core : MonoBehaviour
         _player = new Player(_ballHandler);
         _difficulty = new IncreaseDifficultyByTime(_settings.TimeBeforeDifficultyIncrease, _gameTime);
 
-        _ballData = new BallInitialData() { Difficulty = _difficulty, 
+         var ballData = new BallInitialData() { Difficulty = _difficulty, 
                                             Pool = _objectsPool, 
                                             Particles = _particles, 
                                             BallHandler = _ballHandler, 
@@ -52,7 +49,7 @@ public class Core : MonoBehaviour
 
         _mainCamera = Camera.main;
 
-        _spawnerData = new SpawnerData() { InitialData = _ballData,
+         var spawnerData = new SpawnerData() { InitialData = ballData,
                                            MaxBallsOnScreen = _settings.MaxBallsOnScreen, 
                                            MaxXSpawnPositon = _mainCamera.GetMinBounds().x + SpawnOffsetX,
                                            MinXSpawnPositon = _mainCamera.GetMaxBounds().x - SpawnOffsetX,
@@ -62,10 +59,11 @@ public class Core : MonoBehaviour
                                            MaxBallsAmount = _settings.MaxBallsAmount,
                                            BallHandler = _ballHandler
         };
-        _ballSpawner = new BallsSpawner(_spawnerData);
+        _ballSpawner = new BallsSpawner(spawnerData);
 
-        _screenData = new OnScreenData() { HP = _player.Hp, Score = _player.Score };
-        _ui = new UI(_pauseMenuCanvas, _inGameMenuCanvas, _screenData);
+        var screenData = new OnScreenData() { HP = _player.Hp, Score = _player.Score };
+        var inGameUIInitialData = new InGameUIInitialData() { Canvas = _inGameMenuCanvas, GamePause = _gamePause, ScreenData = screenData };
+        _ui = new UI(_pauseMenuCanvas, inGameUIInitialData);
         _ui.Init();
     }
 
@@ -75,14 +73,10 @@ public class Core : MonoBehaviour
         _gameTime.Update();
         _difficulty.Update();
         _ballSpawner.Update();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _gamePause.Pause();
+            _ui.InGameUI.Close();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            _gamePause.Unpause();
-        }
     }
 }
