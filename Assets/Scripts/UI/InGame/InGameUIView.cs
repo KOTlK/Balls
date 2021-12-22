@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class InGameUIView : IWindow
+public class InGameUIView
 {
     private readonly Canvas _canvas;
     private readonly InGameUIData _data;
