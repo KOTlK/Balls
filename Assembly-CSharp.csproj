@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Balls\Spawner\BallsSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\UI.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu\PauseMenuData.cs" />
     <Compile Include="Assets\Scripts\Balls\BallHandler.cs" />
     <Compile Include="Assets\Scripts\Balls\IPoolable.cs" />
     <Compile Include="Assets\Scripts\Balls\Ball.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Scripts\Balls\Particles.cs" />
     <Compile Include="Assets\Scripts\Difficulty\IncreaseDifficultyByTime.cs" />
     <Compile Include="Assets\Scripts\ObjectPool\Pool.cs" />
+    <Compile Include="Assets\Scripts\Pause\GamePause.cs" />
     <Compile Include="Assets\Scripts\GameTime\GameTick.cs" />
     <Compile Include="Assets\Scripts\Balls\Spawner\BallsFactory.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIController.cs" />
@@ -79,13 +81,11 @@
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUI.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Pause\IPausable.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIModel.cs" />
     <Compile Include="Assets\Scripts\Difficulty\IDifficulty.cs" />
     <Compile Include="Assets\Scripts\Balls\Spawner\Respawner.cs" />
     <Compile Include="Assets\Scripts\UI\IWindow.cs" />
-    <Compile Include="Assets\Scripts\Pause\IPausable.cs" />
-    <Compile Include="Assets\Scripts\Pause\GamePause.cs" />
-    <Compile Include="Assets\Scripts\UI\PauseMenu\PauseMenuData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
