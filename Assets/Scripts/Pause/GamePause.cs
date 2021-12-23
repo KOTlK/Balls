@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 public class GamePause
 {
@@ -11,6 +12,9 @@ public class GamePause
         _paused = false;
     }
 
+    public event Action GamePaused;
+    public event Action GameResume;
+
     public bool isPaused => _paused;
 
     public void Pause()
@@ -20,6 +24,7 @@ public class GamePause
             p.Pause();
         }
         _paused = true;
+        GamePaused?.Invoke();
     }
 
     public void Unpause()
@@ -29,6 +34,7 @@ public class GamePause
             p.Unpause();
         }
         _paused = false;
+        GameResume?.Invoke();
     }
 
     public void AddPauasble(IPausable pausable)
