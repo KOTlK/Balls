@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\Balls\Spawner\BallsSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\UI.cs" />
     <Compile Include="Assets\Scripts\UI\PauseMenu\PauseMenuData.cs" />
+    <Compile Include="Assets\Scripts\UI\LoseScreen\LoseScreen.cs" />
     <Compile Include="Assets\Scripts\Balls\BallHandler.cs" />
     <Compile Include="Assets\Scripts\Balls\IPoolable.cs" />
     <Compile Include="Assets\Scripts\Balls\Ball.cs" />
@@ -81,11 +82,14 @@
     <Compile Include="Assets\Scripts\Extensions\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUI.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\HighScore.cs" />
     <Compile Include="Assets\Scripts\Pause\IPausable.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIModel.cs" />
     <Compile Include="Assets\Scripts\Difficulty\IDifficulty.cs" />
+    <Compile Include="Assets\Scripts\UI\LoseScreen\LoseScreenUIData.cs" />
     <Compile Include="Assets\Scripts\Balls\Spawner\Respawner.cs" />
     <Compile Include="Assets\Scripts\UI\IWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

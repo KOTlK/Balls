@@ -12,6 +12,7 @@ public class Core : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Canvas _pauseMenuCanvas;
     [SerializeField] private Canvas _inGameMenuCanvas;
+    [SerializeField] private Canvas _loseScreenCanvas;
 
     private ObjectsPool _objectsPool;
     private IDifficulty _difficulty;
@@ -23,6 +24,7 @@ public class Core : MonoBehaviour
     private Player _player;
     private UI _ui;
     private BallHandler _ballHandler;
+    private UIHandler _uiHandler;
 
     private float SpawnOffsetX => _settings.SpawnOffsetX;
     private float SpawnOffsetY => _settings.SpawnOffsetY;
@@ -63,8 +65,11 @@ public class Core : MonoBehaviour
 
         var screenData = new OnScreenData() { HP = _player.Hp, Score = _player.Score };
         var inGameUIInitialData = new InGameUIInitialData() { Canvas = _inGameMenuCanvas, GamePause = _gamePause, ScreenData = screenData };
-        _ui = new UI(_pauseMenuCanvas, inGameUIInitialData);
+        var loseScreenInitData = new LoseScreenInitialData() { Canvas = _loseScreenCanvas, Score = _player.Score, Hp = _player.Hp };
+        _ui = new UI(_pauseMenuCanvas, inGameUIInitialData, loseScreenInitData);
         _ui.Init();
+        _uiHandler = new UIHandler(_ui, _gamePause, _player.Hp);
+        _uiHandler.Init();
     }
 
 
@@ -73,10 +78,6 @@ public class Core : MonoBehaviour
         _gameTime.Update();
         _difficulty.Update();
         _ballSpawner.Update();
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            _ui.InGameUI.Close();
-        }
-
     }
+
 }
