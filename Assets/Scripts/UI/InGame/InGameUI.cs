@@ -9,10 +9,6 @@ public class InGameUI : IWindow
     private readonly InGameUIData _uiData;
     private readonly InGameUIInitialData _uiInitialData;
 
-    public event Action Opened;
-    public event Action Closed;
-
-
     public InGameUI(InGameUIInitialData data)
     {
         _uiInitialData = data;
@@ -22,6 +18,9 @@ public class InGameUI : IWindow
         _controller = new InGameUIController(_model, _uiInitialData.ScreenData);
         AddListeners();
     }
+
+    public event Action Opened;
+    public event Action Closed;
 
     public void Open()
     {
