@@ -68,6 +68,8 @@
     <Compile Include="Assets\Scripts\Player\Score.cs" />
     <Compile Include="Assets\Scripts\Settings\Settings.cs" />
     <Compile Include="Assets\Scripts\Core.cs" />
+    <Compile Include="Assets\Scripts\Localization\Localization.cs" />
+    <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
     <Compile Include="Assets\Scripts\Balls\Spawner\BallDestroyer.cs" />
     <Compile Include="Assets\Scripts\UI\InGame\InGameUIData.cs" />
     <Compile Include="Assets\Scripts\Balls\Particles.cs" />
@@ -89,7 +91,6 @@
     <Compile Include="Assets\Scripts\UI\LoseScreen\LoseScreenUIData.cs" />
     <Compile Include="Assets\Scripts\Balls\Spawner\Respawner.cs" />
     <Compile Include="Assets\Scripts\UI\IWindow.cs" />
-    <Compile Include="Assets\Scripts\UI\UIHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -313,6 +314,9 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\Unity\Hub\Editor\2020.3.5f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\jillejr.newtonsoft.json-for-unity@13.0.102\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:\Unity\Hub\Editor\2020.3.5f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
