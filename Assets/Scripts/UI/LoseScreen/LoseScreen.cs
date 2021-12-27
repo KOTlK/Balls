@@ -22,6 +22,7 @@ public class LoseScreen : IWindow
     public void Close()
     {
         _initData.Canvas.enabled = false;
+        _initData.Localization.LanguageChanged -= UpdateInfo;
         Closed?.Invoke();
     }
 
@@ -29,18 +30,19 @@ public class LoseScreen : IWindow
     {
         _initData.Canvas.enabled = true;
         Opened?.Invoke();
+        _initData.Localization.LanguageChanged += UpdateInfo;
         UpdateInfo();
         _uiData.Retry.onClick.AddListener(ReloadScene);
     }
 
     private void UpdateInfo()
     {
-        _uiData.Lose.text = "You Lose!";
-        _uiData.CurrentScore.text = $"Your Score: {_initData.Score.CurrentScore}";
-        _uiData.BestScore.text = $"Best score: {_highScore.TryLoad()}";
+        _uiData.Lose.text = _initData.Localization.FindString(_uiData.Lose.name);
+        _uiData.CurrentScore.text = $"{_initData.Localization.FindString(_uiData.CurrentScore.name)}: {_initData.Score.CurrentScore}";
+        _uiData.BestScore.text = $"{_initData.Localization.FindString(_uiData.BestScore.name)}: {_highScore.TryLoad()}";
     }
 
-    private void ReloadScene() // for tests only
+    private void ReloadScene() // for tests only*
     {
         SceneManager.LoadScene(0);
     }
@@ -52,4 +54,8 @@ public struct LoseScreenInitialData
     public Canvas Canvas;
     public Score Score;
     public Hp Hp;
+    public Localization Localization;
 }
+
+
+//*I lied

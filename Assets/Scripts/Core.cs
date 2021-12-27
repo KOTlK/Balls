@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Extensions;
+using UnityEngine.UI;
 
 public class Core : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class Core : MonoBehaviour
     private UI _ui;
     private BallHandler _ballHandler;
     private UIHandler _uiHandler;
+    private Localization _localization;
 
     private float SpawnOffsetX => _settings.SpawnOffsetX;
     private float SpawnOffsetY => _settings.SpawnOffsetY;
@@ -33,6 +35,7 @@ public class Core : MonoBehaviour
     {
         _objectsPool = new ObjectsPool();
         _gamePause = new GamePause();
+        _localization = new Localization(Languages.English);
 
         _particles = new Particles(_settings.MaxBallsAmount, _particlesPrefab, _particlesParent, _gamePause);
         _particles.Init();
@@ -64,8 +67,8 @@ public class Core : MonoBehaviour
         _ballSpawner = new BallsSpawner(spawnerData);
 
         var screenData = new OnScreenData() { HP = _player.Hp, Score = _player.Score };
-        var inGameUIInitialData = new InGameUIInitialData() { Canvas = _inGameMenuCanvas, GamePause = _gamePause, ScreenData = screenData };
-        var loseScreenInitData = new LoseScreenInitialData() { Canvas = _loseScreenCanvas, Score = _player.Score, Hp = _player.Hp };
+        var inGameUIInitialData = new InGameUIInitialData() { Canvas = _inGameMenuCanvas, GamePause = _gamePause, ScreenData = screenData, Localization = _localization };
+        var loseScreenInitData = new LoseScreenInitialData() { Canvas = _loseScreenCanvas, Score = _player.Score, Hp = _player.Hp, Localization = _localization };
         _ui = new UI(_pauseMenuCanvas, inGameUIInitialData, loseScreenInitData);
         _ui.Init();
         _uiHandler = new UIHandler(_ui, _gamePause, _player.Hp);
@@ -78,6 +81,11 @@ public class Core : MonoBehaviour
         _gameTime.Update();
         _difficulty.Update();
         _ballSpawner.Update();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _localization.ChangeLanguage(Languages.Russian);
+        }
     }
 
 }

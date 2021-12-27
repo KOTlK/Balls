@@ -14,9 +14,9 @@ public class InGameUI : IWindow
         _uiInitialData = data;
         _uiData = _uiInitialData.Canvas.GetComponent<InGameUIData>();
         _model = new InGameUIModel();
-        _view = new InGameUIView(_model, _uiInitialData.Canvas, _uiData);
+        _view = new InGameUIView(_model, _uiInitialData.Canvas, _uiData, data.Localization);
         _controller = new InGameUIController(_model, _uiInitialData.ScreenData);
-        AddListeners();
+        Subscribe();
     }
 
     public event Action Opened;
@@ -26,17 +26,17 @@ public class InGameUI : IWindow
     {
         _controller.Open();
         Opened?.Invoke();
-        AddListeners();
+        Subscribe();
     } 
 
     public void Close()
     {
         _controller.Close();
         Closed?.Invoke();
-        RemoveListeners();
+        Unsubscribe();
     }
 
-    private void AddListeners()
+    private void Subscribe()
     {
         _uiData.MenuButton.onClick.AddListener(_uiInitialData.GamePause.Pause);
         _uiData.MenuButton.onClick.AddListener(Close);
@@ -44,7 +44,7 @@ public class InGameUI : IWindow
         _uiInitialData.ScreenData.HP.HpChanged += _controller.UpdateUI;
     }
 
-    private void RemoveListeners()
+    private void Unsubscribe()
     {
         _uiData.MenuButton.onClick.RemoveListener(_uiInitialData.GamePause.Pause);
         _uiData.MenuButton.onClick.RemoveListener(Close);
@@ -67,4 +67,5 @@ public struct InGameUIInitialData
     public Canvas Canvas;
     public OnScreenData ScreenData;
     public GamePause GamePause;
+    public Localization Localization;
 }

@@ -12,7 +12,7 @@ public class UI
 
     public UI(Canvas pauseMenuCanvas, InGameUIInitialData inGameUIInitialData, LoseScreenInitialData loseScreenData)
     {
-        _pauseMenu = new PauseMenu(pauseMenuCanvas, inGameUIInitialData.GamePause);
+        _pauseMenu = new PauseMenu(pauseMenuCanvas, inGameUIInitialData.GamePause, loseScreenData.Localization);
         _inGameUI = new InGameUI(inGameUIInitialData);
         _loseScreen = new LoseScreen(loseScreenData);
     }
