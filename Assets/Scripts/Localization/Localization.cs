@@ -38,7 +38,6 @@ public class Localization
         var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(text.text);
         _localization = dict;
     }
-
 }
 
 
