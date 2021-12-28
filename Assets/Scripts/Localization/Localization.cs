@@ -29,7 +29,14 @@ public class Localization
 
     public string FindString(string stringName)
     {
-        return _localization[stringName];
+        if (_localization.ContainsKey(stringName))
+        {
+            return _localization[stringName];
+        }else
+        {
+            return stringName;
+        }
+        
     }
 
     private void LoadLanguage(Languages language)
