@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json;
 
@@ -12,10 +8,9 @@ public class Localization
     private Languages _language;
     private Dictionary<string, string> _localization;
 
-    public Localization(Languages startLanguage)
+    public Localization()
     {
-        _language = startLanguage;
-        LoadLanguage(startLanguage);
+        TryLoadSavedLanguage();
     }
 
     public event Action LanguageChanged;
@@ -24,6 +19,7 @@ public class Localization
     {
         _language = language;
         LoadLanguage(language);
+        SaveLanguage();
         LanguageChanged?.Invoke();
     }
 
@@ -45,12 +41,28 @@ public class Localization
         var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(text.text);
         _localization = dict;
     }
+
+    private void SaveLanguage()
+    {
+        PlayerPrefs.SetInt("language", (int)_language);
+    }
+
+    private void TryLoadSavedLanguage()
+    {
+        if (PlayerPrefs.HasKey("language"))
+        {
+            ChangeLanguage((Languages)PlayerPrefs.GetInt("language"));
+        } else
+        {
+            ChangeLanguage(Languages.English);
+        }
+    }
 }
 
 
 public enum Languages
 {
-    English,
-    Russian,
+    English = 0,
+    Russian = 1,
 
 }

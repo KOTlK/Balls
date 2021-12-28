@@ -35,7 +35,7 @@ public class Core : MonoBehaviour
     {
         _objectsPool = new ObjectsPool();
         _gamePause = new GamePause();
-        _localization = new Localization(Languages.English);
+        _localization = new Localization();
 
         _particles = new Particles(_settings.MaxBallsAmount, _particlesPrefab, _particlesParent, _gamePause);
         _particles.Init();
